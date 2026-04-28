@@ -4,55 +4,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Irregular Verbs Trainer</title>
+<title>Strong Verbs Trainer – A2</title>
+
 <style>
-body { font-family: Arial, sans-serif; background:#f5f7fb; padding:10px; }
-.card { background:#fff; padding:12px; border-radius:12px; }
-h1 { font-size:1.4rem; }
-select, button, input { padding:6px; font-size:1rem; margin:4px 0; }
-table { width:100%; border-collapse:collapse; margin-top:10px; }
-th, td { border:1px solid #ccc; padding:6px; text-align:center; }
-th.no { background:#cfe2ff; }
-th.en { background:#e9f2ff; }
-.sound-btn { font-size:1.2rem; }
+body {
+  font-family: Arial, sans-serif;
+  background:#f5f7fb;
+  padding:10px;
+}
+.card {
+  background:#fff;
+  padding:12px;
+  border-radius:12px;
+}
+h1 {
+  font-size:1.4rem;
+}
+select, button, input {
+  padding:6px;
+  font-size:1rem;
+  margin:4px 0;
+}
+table {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+th, td {
+  border:1px solid #ccc;
+  padding:6px;
+  text-align:center;
+}
+th.no {
+  background:#cfe2ff;
+}
+th.en {
+  background:#e9f2ff;
+}
+.sound-btn {
+  font-size:1.2rem;
+}
 </style>
 </head>
+
 <body>
 <div class="card">
-<h1>Øv på engelske sterke verb</h1>
-<select id="groupSelect"></select>
-<button onclick="loadRandom()">🎲 Vel 3 tilfeldige verb</button>
-<div id="exercise"></div>
-<button onclick="checkAnswers()">Sjekk svar</button>
-</div>
-<script>
-function speak(i,p,pp){const u=new SpeechSynthesisUtterance(`to ${i}. ${p}. have ${pp}.`);u.lang='en-GB';u.rate=0.9;speechSynthesis.cancel();speechSynthesis.speak(u);} 
+  <h1>Øv på engelske sterke verb (A2)</h1>
 
-const groups=[
-[{nn:'gjere',inf:'do',past:'did',pp:'done'},{nn:'vere',inf:'be',past:'was/were',pp:'been'},{nn:'ha',inf:'have',past:'had',pp:'had'}],
-[{nn:'byrje',inf:'begin',past:'began',pp:'begun'},{nn:'bryte',inf:'break',past:'broke',pp:'broken'},{nn:'bringe',inf:'bring',past:'brought',pp:'brought'}],
-[{nn:'byggje',inf:'build',past:'built',pp:'built'},{nn:'kjøpe',inf:'buy',past:'bought',pp:'bought'},{nn:'kome',inf:'come',past:'came',pp:'come'}],
-[{nn:'kutte',inf:'cut',past:'cut',pp:'cut'},{nn:'teikne',inf:'draw',past:'drew',pp:'drawn'},{nn:'drikke',inf:'drink',past:'drank',pp:'drunk'}],
-[{nn:'køyre',inf:'drive',past:'drove',pp:'driven'},{nn:'ete',inf:'eat',past:'ate',pp:'eaten'},{nn:'falle',inf:'fall',past:'fell',pp:'fallen'}],
-[{nn:'finne',inf:'find',past:'found',pp:'found'},{nn:'kjenne',inf:'feel',past:'felt',pp:'felt'},{nn:'fly',inf:'fly',past:'flew',pp:'flown'}],
-[{nn:'gløyme',inf:'forget',past:'forgot',pp:'forgotten'},{nn:'få',inf:'get',past:'got',pp:'got/gotten'},{nn:'gi',inf:'give',past:'gave',pp:'given'}],
-[{nn:'gå',inf:'go',past:'went',pp:'gone'},{nn:'vekse',inf:'grow',past:'grew',pp:'grown'},{nn:'høyre',inf:'hear',past:'heard',pp:'heard'}],
-[{nn:'halde',inf:'keep',past:'kept',pp:'kept'},{nn:'vite',inf:'know',past:'knew',pp:'known'},{nn:'leie',inf:'lead',past:'led',pp:'led'}],
-[{nn:'dra',inf:'leave',past:'left',pp:'left'},{nn:'tape',inf:'lose',past:'lost',pp:'lost'},{nn:'lage',inf:'make',past:'made',pp:'made'}],
-[{nn:'møte',inf:'meet',past:'met',pp:'met'},{nn:'lese',inf:'read',past:'read',pp:'read'},{nn:'springe',inf:'run',past:'ran',pp:'run'}],
-[{nn:'sjå',inf:'see',past:'saw',pp:'seen'},{nn:'sitje',inf:'sit',past:'sat',pp:'sat'},{nn:'snakke',inf:'speak',past:'spoke',pp:'spoken'}],
-[{nn:'ta',inf:'take',past:'took',pp:'taken'},{nn:'undervise',inf:'teach',past:'taught',pp:'taught'},{nn:'fortelje',inf:'tell',past:'told',pp:'told'}],
-[{nn:'tenkje',inf:'think',past:'thought',pp:'thought'},{nn:'forstå',inf:'understand',past:'understood',pp:'understood'},{nn:'ha på seg',inf:'wear',past:'wore',pp:'worn'},{nn:'skrive',inf:'write',past:'wrote',pp:'written'}]
+  <select id="groupSelect"></select>
+  <button onclick="loadRandom()">🎲 Vel 3 tilfeldige verb</button>
+
+  <div id="exercise"></div>
+
+  <button onclick="checkAnswers()">Sjekk svar</button>
+</div>
+
+<script>
+// 🔊 Uttale (britisk engelsk)
+function speak(inf, past, pp) {
+  const u = new SpeechSynthesisUtterance(`to ${inf}. ${past}. have ${pp}.`);
+  u.lang = 'en-GB';
+  u.rate = 0.9;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+// ✅ 14 grupper (gruppe 14 har 4 verb)
+const groups = [
+  [
+    {nn:'gjere',inf:'do',past:'did',pp:'done'},
+    {nn:'vere',inf:'be',past:'was/were',pp:'been'},
+    {nn:'ha',inf:'have',past:'had',pp:'had'}
+  ],
+  [
+    {nn:'byrje',inf:'begin',past:'began',pp:'begun'},
+    {nn:'bryte',inf:'break',past:'broke',pp:'broken'},
+    {nn:'bringe',inf:'bring',past:'brought',pp:'brought'}
+  ],
+  [
+    {nn:'byggje',inf:'build',past:'built',pp:'built'},
+    {nn:'kjøpe',inf:'buy',past:'bought',pp:'bought'},
+    {nn:'kome',inf:'come',past:'came',pp:'come'}
+  ],
+  [
+    {nn:'kutte',inf:'cut',past:'cut',pp:'cut'},
+    {nn:'teikne',inf:'draw',past:'drew',pp:'drawn'},
+    {nn:'drikke',inf:'drink',past:'drank',pp:'drunk'}
+  ],
+  [
+    {nn:'køyre',inf:'drive',past:'drove',pp:'driven'},
+    {nn:'ete',inf:'eat',past:'ate',pp:'eaten'},
+    {nn:'falle',inf:'fall',past:'fell',pp:'fallen'}
+  ],
+  [
+    {nn:'finne',inf:'find',past:'found',pp:'found'},
+    {nn:'kjenne',inf:'feel',past:'felt',pp:'felt'},
+    {nn:'fly',inf:'fly',past:'flew',pp:'flown'}
+  ],
+  [
+    {nn:'gløyme',inf:'forget',past:'forgot',pp:'forgotten'},
+    {nn:'få',inf:'get',past:'got',pp:'got/gotten'},
+    {nn:'gi',inf:'give',past:'gave',pp:'given'}
+  ],
+  [
+    {nn:'gå',inf:'go',past:'went',pp:'gone'},
+    {nn:'vekse',inf:'grow',past:'grew',pp:'grown'},
+    {nn:'høyre',inf:'hear',past:'heard',pp:'heard'}
+  ],
+  [
+    {nn:'halde',inf:'keep',past:'kept',pp:'kept'},
+    {nn:'vite',inf:'know',past:'knew',pp:'known'},
+    {nn:'leie',inf:'lead',past:'led',pp:'led'}
+  ],
+  [
+    {nn:'dra',inf:'leave',past:'left',pp:'left'},
+    {nn:'tape',inf:'lose',past:'lost',pp:'lost'},
+    {nn:'lage',inf:'make',past:'made',pp:'made'}
+  ],
+  [
+    {nn:'møte',inf:'meet',past:'met',pp:'met'},
+    {nn:'lese',inf:'read',past:'read',pp:'read'},
+    {nn:'springe',inf:'run',past:'ran',pp:'run'}
+  ],
+  [
+    {nn:'sjå',inf:'see',past:'saw',pp:'seen'},
+    {nn:'sitje',inf:'sit',past:'sat',pp:'sat'},
+    {nn:'snakke',inf:'speak',past:'spoke',pp:'spoken'}
+  ],
+  [
+    {nn:'ta',inf:'take',past:'took',pp:'taken'},
+    {nn:'undervise',inf:'teach',past:'taught',pp:'taught'},
+    {nn:'fortelje',inf:'tell',past:'told',pp:'told'}
+  ],
+  [
+    {nn:'tenkje',inf:'think',past:'thought',pp:'thought'},
+    {nn:'forstå',inf:'understand',past:'understood',pp:'understood'},
+    {nn:'ha på seg',inf:'wear',past:'wore',pp:'worn'},
+    {nn:'skrive',inf:'write',past:'wrote',pp:'written'}
+  ]
 ];
 
-const allVerbs=groups.flat();groups.push(allVerbs);
-const sel=document.getElementById('groupSelect');
-groups.forEach((g,i)=>{const o=document.createElement('option');o.value=i;o.textContent=(i===groups.length-1)?'Alle dei 50 verba':'Gruppe '+(i+1)+': '+g.map(v=>v.inf).join(', ');sel.appendChild(o);});
-sel.onchange=()=>render(groups[sel.value]);
+// ➕ Gruppe med alle 50 verba
+const allVerbs = groups.flat();
+groups.push(allVerbs);
 
-function loadRandom(){render([...allVerbs].sort(()=>0.5-Math.random()).slice(0,3));}
+// 🔽 Nedtrekksmeny
+const sel = document.getElementById('groupSelect');
+groups.forEach((g,i)=>{
+  const o = document.createElement('option');
+  o.value = i;
+  o.textContent =
+    (i === groups.length - 1)
+      ? 'Alle dei 50 verba'
+      : 'Gruppe ' + (i+1) + ': ' + g.map(v=>v.inf).join(', ');
+  sel.appendChild(o);
+});
+sel.onchange = ()=>render(groups[sel.value]);
 
-function render(g){let h='<table><tr><th rowspan=2>Nynorsk</th><th rowspan=2>Lyd</th><th class=no>Infinitiv</th><th class=no>Preteritum</th><th class=no>Perfektum</th><th rowspan=2>Fasit</th></tr><tr><th class=en>Infinitive (to)</th><th class=en>Simple past</th><th class=en>Present perfect (have)</th></tr>';g.forEach(v=>{h+=`<tr><td>${v.nn}</td><td><button class=sound-btn onclick="speak('${v.inf}','${v.past}','${v.pp}')">🔊</button></td><td><input></td><td><input></td><td><input></td><td><button onclick="alert('${v.inf} – ${v.past} – ${v.pp}')">Vis</button></td></tr>`});h+='</table>';document.getElementById('exercise').innerHTML=h;}
+function loadRandom() {
+  render([...allVerbs].sort(()=>0.5-Math.random()).slice(0,3));
+}
+
+// 🧱 Teikn tabellen
+function render(g){
+  let h = `
+  <table>
+    <tr>
+      <th rowspan="2">Nynorsk</th>
+      <th rowspan="2">Lyd</th>
+      <th class="no">Infinitiv</th>
+      <th class="no">Preteritum</th>
+      <th class="no">Perfektum</th>
+      <th rowspan="2">Fasit</th>
+    </tr>
+    <tr>
+      <th class="en">Infinitive (to)</th>
+      <th class="en">Simple past</th>
+      <th class="en">Present perfect (have)</th>
+    </tr>
+  `;
+  g.forEach(v=>{
+    h += `
+      <tr>
+        <td>${v.nn}</td>
+        <td><button class="sound-btn" onclick="speak('${v.inf}','${v.past}','${v.pp}')">🔊</button></td>
+        <td><input></td>
+        <td><input></td>
+        <td><input></td>
+        <td><button onclick="alert('${v.inf} – ${v.past} – ${v.pp}')">Vis</button></td>
+      </tr>
+    `;
+  });
+  h += '</table>';
+  document.getElementById('exercise').innerHTML = h;
+}
+
+// ✅ Raud/grøn retting
+function checkAnswers(){
+  const rows = document.querySelectorAll('#exercise tr');
+  const currentGroup = groups[sel.value];
+  rows.forEach((row, idx)=>{
+    if(idx < 2) return; // hopp over overskrifter
+    const inputs = row.querySelectorAll('input');
+    const verb = currentGroup[idx-2];
+    const fasit = [verb.inf, verb.past, verb.pp];
+    inputs.forEach((inp,i)=>{
+      if(inp.value.trim().toLowerCase() === fasit[i]){
+        inp.style.backgroundColor = '#d4f8d4'; // grønt
+      } else {
+        inp.style.backgroundColor = '#f8d4d4'; // raudt
+      }
+    });
+  });
+}
+
+// start
 render(groups[0]);
 </script>
 </body>
