@@ -44,6 +44,10 @@ th.en {
 .sound-btn {
   font-size:1.2rem;
 }
+#summary {
+  margin-top:10px;
+  font-weight:bold;
+}
 </style>
 </head>
 
@@ -57,6 +61,7 @@ th.en {
   <div id="exercise"></div>
 
   <button onclick="checkAnswers()">Sjekk svar</button>
+  <div id="summary"></div>
 </div>
 
 <script>
@@ -197,25 +202,34 @@ function render(g){
   });
   h += '</table>';
   document.getElementById('exercise').innerHTML = h;
+  document.getElementById('summary').textContent = '';
 }
 
-// ✅ Raud/grøn retting
+// ✅ Raud/grøn retting + poengoppsummering
 function checkAnswers(){
   const rows = document.querySelectorAll('#exercise tr');
   const currentGroup = groups[sel.value];
+  let correct = 0;
+  let total = 0;
+
   rows.forEach((row, idx)=>{
     if(idx < 2) return; // hopp over overskrifter
     const inputs = row.querySelectorAll('input');
     const verb = currentGroup[idx-2];
     const fasit = [verb.inf, verb.past, verb.pp];
     inputs.forEach((inp,i)=>{
+      total++;
       if(inp.value.trim().toLowerCase() === fasit[i]){
         inp.style.backgroundColor = '#d4f8d4'; // grønt
+        correct++;
       } else {
         inp.style.backgroundColor = '#f8d4d4'; // raudt
       }
     });
   });
+
+  document.getElementById('summary').textContent =
+    `Du fekk ${correct} av ${total} rette svar.`;
 }
 
 // start
@@ -223,3 +237,4 @@ render(groups[0]);
 </script>
 </body>
 </html>
+``
